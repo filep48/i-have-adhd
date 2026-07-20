@@ -167,6 +167,20 @@ Always follow the rules in the `i-have-adhd` skill: action-first, numbered steps
 
 Add the same text to **Cursor Settings → Rules → User Rules** (applies across projects), or put it in a project rule under `.cursor/rules/` with `alwaysApply: true`.
 
+## On-demand only (optional)
+
+The skill's frontmatter `description` tells the model to apply the rules to *every* message, including ones
+where brevity was never requested. If you'd rather it engage only when you ask, replace the `description`
+line in `skills/i-have-adhd/SKILL.md` with:
+
+```yaml
+description: Action-first, ADHD-friendly output shaping (lead with the next action, numbered steps, no preamble, restate state, suppress tangents, make wins visible). OPT-IN ONLY: use this skill ONLY when the user explicitly asks for it in that message - e.g. "adhd mode", "/i-have-adhd", "short version", "just the steps", "skip the preamble", "tl;dr" - or while the user has explicitly turned the mode on and has not said "stop adhd mode"/"normal mode". Do NOT apply by default. If it was not explicitly requested, respond normally and do not shape or shorten the answer.
+```
+
+Then `/i-have-adhd` (or "adhd mode") turns it on for the session, and "stop adhd mode" / "normal mode" turns
+it off. Restart Claude Code after editing. The ten rules themselves are unchanged — this only changes *when*
+they engage.
+
 ## Troubleshooting
 
 **`/i-have-adhd` not in autocomplete.** Restart Claude Code. The plugin index is read at startup.
